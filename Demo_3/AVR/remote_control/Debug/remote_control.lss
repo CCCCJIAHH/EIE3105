@@ -1,0 +1,567 @@
+
+remote_control.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800100  00800100  000002b6  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000262  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .comment      00000030  00000000  00000000  000002b6  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000002e8  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000040  00000000  00000000  00000328  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000858  00000000  00000000  00000368  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 000006cd  00000000  00000000  00000bc0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000446  00000000  00000000  0000128d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000064  00000000  00000000  000016d4  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    000003a4  00000000  00000000  00001738  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    000002cd  00000000  00000000  00001adc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000030  00000000  00000000  00001da9  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+   8:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+   c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  10:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  14:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  18:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  1c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  20:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  24:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  28:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  2c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  30:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  34:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  38:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  3c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  40:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  44:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  48:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  4c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  50:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  54:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  58:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  5c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  60:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  64:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_clear_bss>:
+  74:	21 e0       	ldi	r18, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	01 c0       	rjmp	.+2      	; 0x7e <.do_clear_bss_start>
+
+0000007c <.do_clear_bss_loop>:
+  7c:	1d 92       	st	X+, r1
+
+0000007e <.do_clear_bss_start>:
+  7e:	a0 30       	cpi	r26, 0x00	; 0
+  80:	b2 07       	cpc	r27, r18
+  82:	e1 f7       	brne	.-8      	; 0x7c <.do_clear_bss_loop>
+  84:	0e 94 6a 00 	call	0xd4	; 0xd4 <main>
+  88:	0c 94 2f 01 	jmp	0x25e	; 0x25e <_exit>
+
+0000008c <__bad_interrupt>:
+  8c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000090 <usart_init>:
+//receive data
+unsigned char usart_receive(void){
+	while (! (UCSR0A & (1<<RXC0)));
+	data= UDR0;
+	return data; //Can¡¦t directly return UDR0 !!!!!
+}
+  90:	88 e1       	ldi	r24, 0x18	; 24
+  92:	80 93 c1 00 	sts	0x00C1, r24	; 0x8000c1 <__TEXT_REGION_LENGTH__+0x7f80c1>
+  96:	86 e0       	ldi	r24, 0x06	; 6
+  98:	80 93 c2 00 	sts	0x00C2, r24	; 0x8000c2 <__TEXT_REGION_LENGTH__+0x7f80c2>
+  9c:	87 e6       	ldi	r24, 0x67	; 103
+  9e:	80 93 c4 00 	sts	0x00C4, r24	; 0x8000c4 <__TEXT_REGION_LENGTH__+0x7f80c4>
+  a2:	08 95       	ret
+
+000000a4 <usart_send>:
+  a4:	e0 ec       	ldi	r30, 0xC0	; 192
+  a6:	f0 e0       	ldi	r31, 0x00	; 0
+  a8:	90 81       	ld	r25, Z
+  aa:	95 ff       	sbrs	r25, 5
+  ac:	fd cf       	rjmp	.-6      	; 0xa8 <usart_send+0x4>
+  ae:	80 93 c6 00 	sts	0x00C6, r24	; 0x8000c6 <__TEXT_REGION_LENGTH__+0x7f80c6>
+  b2:	08 95       	ret
+
+000000b4 <delay_10ms>:
+
+void delay_10ms()
+{
+	TCCR1A = 0b00000000; // CTC TOP = OCR1A
+  b4:	10 92 80 00 	sts	0x0080, r1	; 0x800080 <__TEXT_REGION_LENGTH__+0x7f8080>
+	TCCR1B = 0b00001011; // Prescaler = 64
+  b8:	8b e0       	ldi	r24, 0x0B	; 11
+  ba:	80 93 81 00 	sts	0x0081, r24	; 0x800081 <__TEXT_REGION_LENGTH__+0x7f8081>
+	OCR1A = 2500; // 1 / (16 MHz / 64) = 0.004 ms,  10ms / 0.004 ms = 2500
+  be:	84 ec       	ldi	r24, 0xC4	; 196
+  c0:	99 e0       	ldi	r25, 0x09	; 9
+  c2:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__TEXT_REGION_LENGTH__+0x7f8089>
+  c6:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__TEXT_REGION_LENGTH__+0x7f8088>
+	
+	unsigned char count = 0;
+	while (count < 1) // 1 x 10 ms = 10ms
+	{
+		while(!(TIFR1 & (1<<OCF1A))) ;
+  ca:	b1 9b       	sbis	0x16, 1	; 22
+  cc:	fe cf       	rjmp	.-4      	; 0xca <delay_10ms+0x16>
+		TIFR1 = (1<<OCF1A);
+  ce:	82 e0       	ldi	r24, 0x02	; 2
+  d0:	86 bb       	out	0x16, r24	; 22
+  d2:	08 95       	ret
+
+000000d4 <main>:
+int main(void)
+{
+	unsigned char colloc,rowloc=5,column=5;
+	unsigned int flag;
+	unsigned char state=0;
+	usart_init();
+  d4:	0e 94 48 00 	call	0x90	; 0x90 <usart_init>
+	DDRD= 0x00 ; //input PORTD2-3
+  d8:	1a b8       	out	0x0a, r1	; 10
+	PORTD=0xFF;
+  da:	8f ef       	ldi	r24, 0xFF	; 255
+  dc:	8b b9       	out	0x0b, r24	; 11
+	DDRB=0xFF; //output PORTB0-2
+  de:	84 b9       	out	0x04, r24	; 4
+	PORTB=0x00;
+  e0:	15 b8       	out	0x05, r1	; 5
+	do
+	{
+		PORTB = 0xF8; //ground all rows at once
+  e2:	98 ef       	ldi	r25, 0xF8	; 248
+  e4:	95 b9       	out	0x05, r25	; 5
+		colloc=(PIND & 0x0C); //read the columns
+  e6:	89 b1       	in	r24, 0x09	; 9
+	} while (colloc != 0x0C); //check until all keys released
+  e8:	8c 70       	andi	r24, 0x0C	; 12
+  ea:	8c 30       	cpi	r24, 0x0C	; 12
+  ec:	d9 f7       	brne	.-10     	; 0xe4 <main+0x10>
+  ee:	10 e0       	ldi	r17, 0x00	; 0
+  f0:	0f 2e       	mov	r0, r31
+  f2:	f5 e0       	ldi	r31, 0x05	; 5
+  f4:	ef 2e       	mov	r14, r31
+  f6:	f0 2d       	mov	r31, r0
+  f8:	0f 2e       	mov	r0, r31
+  fa:	f5 e0       	ldi	r31, 0x05	; 5
+  fc:	df 2e       	mov	r13, r31
+  fe:	f0 2d       	mov	r31, r0
+	while (1)
+	{
+		PORTB = 0xF8; //ground all rows at once
+ 100:	0f 2e       	mov	r0, r31
+ 102:	f8 ef       	ldi	r31, 0xF8	; 248
+ 104:	7f 2e       	mov	r7, r31
+ 106:	f0 2d       	mov	r31, r0
+ 108:	51 2c       	mov	r5, r1
+ 10a:	d5 2d       	mov	r29, r5
+		
+		while(1)
+		{
+			flag=0;
+			state=1;
+			PORTB = 0xFE; //ground row 0
+ 10c:	0f 2e       	mov	r0, r31
+ 10e:	fe ef       	ldi	r31, 0xFE	; 254
+ 110:	af 2e       	mov	r10, r31
+ 112:	f0 2d       	mov	r31, r0
+			
+			if(colloc != 0x0C) //column detected
+			{
+				rowloc=0;  //save row location
+				if(colloc==0x08){column=0;}
+				else{column=1;}
+ 114:	88 24       	eor	r8, r8
+ 116:	83 94       	inc	r8
+				flag++;
+			}
+			
+			PORTB=0xFD; //ground row 1
+ 118:	0f 2e       	mov	r0, r31
+ 11a:	fd ef       	ldi	r31, 0xFD	; 253
+ 11c:	bf 2e       	mov	r11, r31
+ 11e:	f0 2d       	mov	r31, r0
+			}
+			
+			
+			
+			
+			PORTB=0xFB; //ground row 2
+ 120:	0f 2e       	mov	r0, r31
+ 122:	fb ef       	ldi	r31, 0xFB	; 251
+ 124:	cf 2e       	mov	r12, r31
+ 126:	f0 2d       	mov	r31, r0
+			delay_10ms();  //call delay
+			colloc=(PIND & 0x0C); //read columns
+			
+			if(colloc != 0x0C) //column detected
+			{
+				rowloc=2;  //save row location
+ 128:	68 94       	set
+ 12a:	44 24       	eor	r4, r4
+ 12c:	41 f8       	bld	r4, 1
+			
+			if(colloc != 0x0C) //column detected
+			{
+				rowloc=0;  //save row location
+				if(colloc==0x08){column=0;}
+				else{column=1;}
+ 12e:	f8 2c       	mov	r15, r8
+					usart_send('5');
+					rowloc=3;
+					break;
+				}
+				else if(colloc == 0x08){ //PD2 (left up)
+					usart_send('1');
+ 130:	0f 2e       	mov	r0, r31
+ 132:	f3 e0       	ldi	r31, 0x03	; 3
+ 134:	6f 2e       	mov	r6, r31
+ 136:	f0 2d       	mov	r31, r0
+			delay_10ms();  //call delay
+			colloc=(PIND & 0x0C); //read columns
+			
+			if(colloc != 0x0C) //column detected
+			{
+				rowloc=2;  //save row location
+ 138:	94 2c       	mov	r9, r4
+ 13a:	04 c0       	rjmp	.+8      	; 0x144 <main+0x70>
+ 13c:	e5 2c       	mov	r14, r5
+ 13e:	01 c0       	rjmp	.+2      	; 0x142 <main+0x6e>
+ 140:	e8 2c       	mov	r14, r8
+ 142:	18 2d       	mov	r17, r8
+		PORTB = 0xF8; //ground all rows at once
+		colloc=(PIND & 0x0C); //read the columns
+	} while (colloc != 0x0C); //check until all keys released
+	while (1)
+	{
+		PORTB = 0xF8; //ground all rows at once
+ 144:	75 b8       	out	0x05, r7	; 5
+		
+		do
+		{
+			do
+			{
+				delay_10ms();  //call delay
+ 146:	0e 94 5a 00 	call	0xb4	; 0xb4 <delay_10ms>
+				colloc=(PIND & 0x0C); //see if any key is pressed
+ 14a:	c9 b1       	in	r28, 0x09	; 9
+ 14c:	cc 70       	andi	r28, 0x0C	; 12
+				if(state==0)
+ 14e:	11 11       	cpse	r17, r1
+ 150:	03 c0       	rjmp	.+6      	; 0x158 <main+0x84>
+				{
+					usart_send('a');
+ 152:	81 e6       	ldi	r24, 0x61	; 97
+ 154:	0e 94 52 00 	call	0xa4	; 0xa4 <usart_send>
+ 158:	1d 2f       	mov	r17, r29
+				}
+				else state=0;
+			} while (colloc == 0x0C); //keep checking for key press
+ 15a:	cc 30       	cpi	r28, 0x0C	; 12
+ 15c:	a1 f3       	breq	.-24     	; 0x146 <main+0x72>
+			
+			//delay_50ms();  //call delay for debounce
+			colloc=(PIND & 0x0C); //read columns
+ 15e:	89 b1       	in	r24, 0x09	; 9
+		} while (colloc == 0x0C);
+ 160:	8c 70       	andi	r24, 0x0C	; 12
+ 162:	8c 30       	cpi	r24, 0x0C	; 12
+ 164:	81 f3       	breq	.-32     	; 0x146 <main+0x72>
+ 166:	01 c0       	rjmp	.+2      	; 0x16a <main+0x96>
+			delay_10ms();  //call delay
+			colloc=(PIND & 0x0C); //read columns
+			
+			if(colloc != 0x0C) //column detected
+			{
+				rowloc=2;  //save row location
+ 168:	d9 2c       	mov	r13, r9
+		
+		while(1)
+		{
+			flag=0;
+			state=1;
+			PORTB = 0xFE; //ground row 0
+ 16a:	a5 b8       	out	0x05, r10	; 5
+			delay_10ms();  //call delay
+ 16c:	0e 94 5a 00 	call	0xb4	; 0xb4 <delay_10ms>
+			colloc=(PIND & 0x0C); //read columns
+ 170:	89 b1       	in	r24, 0x09	; 9
+ 172:	8c 70       	andi	r24, 0x0C	; 12
+			
+			if(colloc != 0x0C) //column detected
+ 174:	8c 30       	cpi	r24, 0x0C	; 12
+ 176:	41 f0       	breq	.+16     	; 0x188 <main+0xb4>
+			{
+				rowloc=0;  //save row location
+				if(colloc==0x08){column=0;}
+				else{column=1;}
+ 178:	ef 2c       	mov	r14, r15
+ 17a:	88 30       	cpi	r24, 0x08	; 8
+ 17c:	09 f4       	brne	.+2      	; 0x180 <main+0xac>
+ 17e:	ed 2e       	mov	r14, r29
+				flag++;
+ 180:	01 e0       	ldi	r16, 0x01	; 1
+ 182:	10 e0       	ldi	r17, 0x00	; 0
+			delay_10ms();  //call delay
+			colloc=(PIND & 0x0C); //read columns
+			
+			if(colloc != 0x0C) //column detected
+			{
+				rowloc=0;  //save row location
+ 184:	dd 2e       	mov	r13, r29
+ 186:	02 c0       	rjmp	.+4      	; 0x18c <main+0xb8>
+			colloc=(PIND & 0x0C); //read columns
+		} while (colloc == 0x0C);
+		
+		while(1)
+		{
+			flag=0;
+ 188:	00 e0       	ldi	r16, 0x00	; 0
+ 18a:	10 e0       	ldi	r17, 0x00	; 0
+				if(colloc==0x08){column=0;}
+				else{column=1;}
+				flag++;
+			}
+			
+			PORTB=0xFD; //ground row 1
+ 18c:	b5 b8       	out	0x05, r11	; 5
+			delay_10ms();  //call delay
+ 18e:	0e 94 5a 00 	call	0xb4	; 0xb4 <delay_10ms>
+			colloc=(PIND & 0x0C); //read columns
+ 192:	89 b1       	in	r24, 0x09	; 9
+ 194:	8c 70       	andi	r24, 0x0C	; 12
+			
+			if(colloc != 0x0C) //column detected
+ 196:	8c 30       	cpi	r24, 0x0C	; 12
+ 198:	39 f0       	breq	.+14     	; 0x1a8 <main+0xd4>
+			{
+				rowloc=1;  //save row location
+				if(colloc==0x08){column=0;}
+ 19a:	ef 2c       	mov	r14, r15
+ 19c:	88 30       	cpi	r24, 0x08	; 8
+ 19e:	09 f4       	brne	.+2      	; 0x1a2 <main+0xce>
+ 1a0:	ed 2e       	mov	r14, r29
+				else{column=1;}
+				flag++;
+ 1a2:	0f 5f       	subi	r16, 0xFF	; 255
+ 1a4:	1f 4f       	sbci	r17, 0xFF	; 255
+			delay_10ms();  //call delay
+			colloc=(PIND & 0x0C); //read columns
+			
+			if(colloc != 0x0C) //column detected
+			{
+				rowloc=1;  //save row location
+ 1a6:	df 2c       	mov	r13, r15
+			}
+			
+			
+			
+			
+			PORTB=0xFB; //ground row 2
+ 1a8:	c5 b8       	out	0x05, r12	; 5
+			delay_10ms();  //call delay
+ 1aa:	0e 94 5a 00 	call	0xb4	; 0xb4 <delay_10ms>
+			colloc=(PIND & 0x0C); //read columns
+ 1ae:	c9 b1       	in	r28, 0x09	; 9
+ 1b0:	cc 70       	andi	r28, 0x0C	; 12
+			
+			if(colloc != 0x0C) //column detected
+ 1b2:	cc 30       	cpi	r28, 0x0C	; 12
+ 1b4:	09 f4       	brne	.+2      	; 0x1b8 <main+0xe4>
+ 1b6:	4a c0       	rjmp	.+148    	; 0x24c <main+0x178>
+			{
+				rowloc=2;  //save row location
+				if(colloc==0x08){column=0;}
+ 1b8:	ef 2c       	mov	r14, r15
+ 1ba:	c8 30       	cpi	r28, 0x08	; 8
+ 1bc:	09 f4       	brne	.+2      	; 0x1c0 <main+0xec>
+ 1be:	ed 2e       	mov	r14, r29
+				else{column=1;}
+				flag++;
+			}
+		
+			if(flag==3){
+ 1c0:	02 30       	cpi	r16, 0x02	; 2
+ 1c2:	11 05       	cpc	r17, r1
+ 1c4:	09 f0       	breq	.+2      	; 0x1c8 <main+0xf4>
+ 1c6:	47 c0       	rjmp	.+142    	; 0x256 <main+0x182>
+				if(colloc == 0x04){ //PD3 (right up)
+ 1c8:	c4 30       	cpi	r28, 0x04	; 4
+ 1ca:	39 f4       	brne	.+14     	; 0x1da <main+0x106>
+					usart_send('5');
+ 1cc:	85 e3       	ldi	r24, 0x35	; 53
+ 1ce:	0e 94 52 00 	call	0xa4	; 0xa4 <usart_send>
+			}
+			
+		
+		}
+		//column 1
+		else if(column==1){
+ 1d2:	c8 30       	cpi	r28, 0x08	; 8
+ 1d4:	91 f5       	brne	.+100    	; 0x23a <main+0x166>
+ 1d6:	d6 2c       	mov	r13, r6
+ 1d8:	b4 cf       	rjmp	.-152    	; 0x142 <main+0x6e>
+				if(colloc == 0x04){ //PD3 (right up)
+					usart_send('5');
+					rowloc=3;
+					break;
+				}
+				else if(colloc == 0x08){ //PD2 (left up)
+ 1da:	c8 30       	cpi	r28, 0x08	; 8
+ 1dc:	29 f6       	brne	.-118    	; 0x168 <main+0x94>
+					usart_send('1');
+ 1de:	81 e3       	ldi	r24, 0x31	; 49
+ 1e0:	0e 94 52 00 	call	0xa4	; 0xa4 <usart_send>
+ 1e4:	d6 2c       	mov	r13, r6
+ 1e6:	11 c0       	rjmp	.+34     	; 0x20a <main+0x136>
+		
+		}
+		
+		//check column and send result to tera term
+		//column 0(PD2)
+		if(column==0){
+ 1e8:	e1 10       	cpse	r14, r1
+ 1ea:	17 c0       	rjmp	.+46     	; 0x21a <main+0x146>
+			if(rowloc==0){ //row 0(PB0)
+ 1ec:	d1 10       	cpse	r13, r1
+ 1ee:	05 c0       	rjmp	.+10     	; 0x1fa <main+0x126>
+				usart_send('2');
+ 1f0:	82 e3       	ldi	r24, 0x32	; 50
+ 1f2:	0e 94 52 00 	call	0xa4	; 0xa4 <usart_send>
+ 1f6:	a5 cf       	rjmp	.-182    	; 0x142 <main+0x6e>
+			delay_10ms();  //call delay
+			colloc=(PIND & 0x0C); //read columns
+			
+			if(colloc != 0x0C) //column detected
+			{
+				rowloc=2;  //save row location
+ 1f8:	d4 2c       	mov	r13, r4
+		//column 0(PD2)
+		if(column==0){
+			if(rowloc==0){ //row 0(PB0)
+				usart_send('2');
+			}
+			if(rowloc==1){ //row 1(PB1)
+ 1fa:	81 e0       	ldi	r24, 0x01	; 1
+ 1fc:	d8 12       	cpse	r13, r24
+ 1fe:	05 c0       	rjmp	.+10     	; 0x20a <main+0x136>
+				usart_send('3');
+ 200:	83 e3       	ldi	r24, 0x33	; 51
+ 202:	0e 94 52 00 	call	0xa4	; 0xa4 <usart_send>
+ 206:	e5 2c       	mov	r14, r5
+ 208:	9c cf       	rjmp	.-200    	; 0x142 <main+0x6e>
+			}
+			if (rowloc==2){ //row 2(PB2)
+ 20a:	82 e0       	ldi	r24, 0x02	; 2
+ 20c:	d8 12       	cpse	r13, r24
+ 20e:	96 cf       	rjmp	.-212    	; 0x13c <main+0x68>
+				usart_send('4');
+ 210:	84 e3       	ldi	r24, 0x34	; 52
+ 212:	0e 94 52 00 	call	0xa4	; 0xa4 <usart_send>
+ 216:	e5 2c       	mov	r14, r5
+ 218:	94 cf       	rjmp	.-216    	; 0x142 <main+0x6e>
+			}
+			
+		
+		}
+		//column 1
+		else if(column==1){
+ 21a:	81 e0       	ldi	r24, 0x01	; 1
+ 21c:	e8 12       	cpse	r14, r24
+ 21e:	91 cf       	rjmp	.-222    	; 0x142 <main+0x6e>
+			if(rowloc==0){ //row 0(PB0)
+ 220:	d1 10       	cpse	r13, r1
+ 222:	04 c0       	rjmp	.+8      	; 0x22c <main+0x158>
+				usart_send('8');
+ 224:	88 e3       	ldi	r24, 0x38	; 56
+ 226:	0e 94 52 00 	call	0xa4	; 0xa4 <usart_send>
+ 22a:	8b cf       	rjmp	.-234    	; 0x142 <main+0x6e>
+			}
+			if(rowloc==1){ //row 1(PB1)
+ 22c:	81 e0       	ldi	r24, 0x01	; 1
+ 22e:	d8 12       	cpse	r13, r24
+ 230:	05 c0       	rjmp	.+10     	; 0x23c <main+0x168>
+				usart_send('6');
+ 232:	86 e3       	ldi	r24, 0x36	; 54
+ 234:	0e 94 52 00 	call	0xa4	; 0xa4 <usart_send>
+ 238:	84 cf       	rjmp	.-248    	; 0x142 <main+0x6e>
+			}
+			
+		
+		}
+		//column 1
+		else if(column==1){
+ 23a:	d6 2c       	mov	r13, r6
+				usart_send('8');
+			}
+			if(rowloc==1){ //row 1(PB1)
+				usart_send('6');
+			}
+			if(rowloc==2){ //row 2(PB2)
+ 23c:	82 e0       	ldi	r24, 0x02	; 2
+ 23e:	d8 12       	cpse	r13, r24
+ 240:	7f cf       	rjmp	.-258    	; 0x140 <main+0x6c>
+				usart_send('7');
+ 242:	87 e3       	ldi	r24, 0x37	; 55
+ 244:	0e 94 52 00 	call	0xa4	; 0xa4 <usart_send>
+ 248:	e8 2c       	mov	r14, r8
+ 24a:	7b cf       	rjmp	.-266    	; 0x142 <main+0x6e>
+				if(colloc==0x08){column=0;}
+				else{column=1;}
+				flag++;
+			}
+		
+			if(flag==3){
+ 24c:	03 30       	cpi	r16, 0x03	; 3
+ 24e:	11 05       	cpc	r17, r1
+ 250:	09 f4       	brne	.+2      	; 0x254 <main+0x180>
+ 252:	8b cf       	rjmp	.-234    	; 0x16a <main+0x96>
+ 254:	c9 cf       	rjmp	.-110    	; 0x1e8 <main+0x114>
+		
+		}
+		
+		//check column and send result to tera term
+		//column 0(PD2)
+		if(column==0){
+ 256:	c8 30       	cpi	r28, 0x08	; 8
+ 258:	79 f2       	breq	.-98     	; 0x1f8 <main+0x124>
+			delay_10ms();  //call delay
+			colloc=(PIND & 0x0C); //read columns
+			
+			if(colloc != 0x0C) //column detected
+			{
+				rowloc=2;  //save row location
+ 25a:	d4 2c       	mov	r13, r4
+ 25c:	de cf       	rjmp	.-68     	; 0x21a <main+0x146>
+
+0000025e <_exit>:
+ 25e:	f8 94       	cli
+
+00000260 <__stop_program>:
+ 260:	ff cf       	rjmp	.-2      	; 0x260 <__stop_program>
